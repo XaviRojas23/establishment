@@ -26,7 +26,6 @@ class CreateEstablishmentsTable extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('image_principal');
             $table->string('address');
-            $table->string('neighborhood');
             $table->string('lat');
             $table->string('lng');
             $table->string('tlf');
