@@ -5,8 +5,8 @@
  */
 
 require('./bootstrap');
-import Vue from 'vue';
-window.Vue = require('vue');
+
+//window.Vue = require('vue');
 
 //import router from './router';
 
@@ -31,9 +31,9 @@ window.Vue = require('vue');
 
 /*const app = new Vue({
     el: '#app',
-    //router
-});
-*/
+    router
+});*/
+
 
 require('./map');
-//require('./dropzone');
+require('./dropzone');
