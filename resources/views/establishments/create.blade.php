@@ -105,9 +105,6 @@ crossorigin=""/>
                                     </div>
                                 @enderror
                         </div>
-
-
-
                         <div class="form-group">
                             <label for="nombre">Descripción</label>
                             <textarea

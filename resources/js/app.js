@@ -4,11 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
-//window.Vue = require('vue');
+import Vue from 'vue';
+window.Vue = require('vue').default;
 
-//import router from './router';
+import router from './router';
 
 /**
  * The following block of code may be used to automatically register your
@@ -18,10 +20,10 @@ require('./bootstrap');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+//const files = require.context('./', true, /\.vue$/i)
+//files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('pagina-inicio', require('./components/PaginaInicio.vue').default);
+Vue.component('pagina-inicio', require('./components/PaginaInicio.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,11 +31,9 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-/*const app = new Vue({
+const app = new Vue({
     el: '#app',
     router
-});*/
-
-
+});
 require('./map');
 require('./dropzone');

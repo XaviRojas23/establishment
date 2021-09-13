@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -7,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
         Dropzone.autoDiscover = false;
 
 
-        const dropzone = new Dropzone('#dropzone', {
+        const dropzone = new Dropzone('div#dropzone', {
             url: '/images/store',
             dictDefaultMessage: 'Sube hasta 10 imágenes',
             maxFiles: 10,
             required: true,
             acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
             addRemoveLinks: true,
-            dictRemoveFile: "Eliminar image",
+            dictRemoveFile: "Eliminar imagen",
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
             },
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const params = {
                     image: file.nameServidor,
-                    uuid: document.querySelector('#uuid').value
+                    //uuid: document.querySelector('#uuid').value
                 }
 
                 axios.post('/images/destroy', params)
