@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const params = {
                     image: file.nameServidor,
-                    //uuid: document.querySelector('#uuid').value
+                    uuid: document.querySelector('#uuid').value
                 }
 
                 axios.post('/images/destroy', params)

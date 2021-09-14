@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Establishment;
 use Intervention\Image\Facades\Image;
+use App\Models\Image as ImageModel;
+use SebastianBergmann\Environment\Console;
 
 class EstablishmentController extends Controller
 {
@@ -92,7 +94,16 @@ class EstablishmentController extends Controller
      */
     public function edit(Establishment $establishment)
     {
-        return "desde edit";
+
+        $categories = Category::all();
+
+        $establishment = auth()->user()->establishment;
+        $establishment->opening = date('H:i', strtotime($establishment->opening));
+        $establishment->closing = date('H:i', strtotime($establishment->closing));
+
+        $images = ImageModel::where('id_establishment', $establishment->uuid)->get();
+
+        return view('establishments.edit', compact('categories', 'establishment', 'images'));
 
     }
 
@@ -105,7 +116,45 @@ class EstablishmentController extends Controller
      */
     public function update(Request $request, Establishment $establishment)
     {
-        //
+        $this->authorize('update', $establishment);
+
+        $data = $request->validate([
+            'name' => 'required',
+            'category_id' => 'required|exists:App\Models\Category,id',
+            'image_principal' => 'image|max:1000',
+            'address' => 'required',
+            'lat' => 'required',
+            'lng' => 'required',
+            'tlf' => 'required|numeric',
+            'description' => 'required|min:50',
+            'opening' => 'date_format:H:i',
+            'closing' => 'date_format:H:i|after:opening',
+            'uuid' => 'required|uuid',
+        ]);
+
+        $establishment->name = $data['name'];
+        $establishment->category_id = $data['category_id'];
+        $establishment->address = $data['address'];
+        $establishment->lat = $data['lat'];
+        $establishment->lng = $data['lng'];
+        $establishment->tlf = $data['tlf'];
+        $establishment->description = $data['description'];
+        $establishment->opening = $data['opening'];
+        $establishment->closing = $data['closing'];
+        $establishment->uuid = $data['uuid'];
+
+        if(request('image_principal')){
+
+            $route_image = $request['image_principal']->store('principals', 'public');
+            $img = Image::make(public_path("storage/{$route_image}"))->fit(800,600);
+            $img->save();
+
+            $establishment->image_principal = $route_image;
+
+        }
+        $establishment->save();
+
+        return back()->with('estado', 'Tu información se almacenó correctamente');
     }
 
     /**

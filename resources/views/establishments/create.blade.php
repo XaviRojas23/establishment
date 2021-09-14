@@ -152,7 +152,7 @@ crossorigin=""/>
                         </div>
                 </fieldset>
                 <fieldset class="border p-4 mt-5">
-                    <legend  class="text-primary">Información Establecimiento </legend>
+                    <legend  class="text-primary">Imagenes Establecimiento: </legend>
                     <div class="form-group">
                         <label for="image">Imagenes</label>
                         <div id="dropzone" class="dropzone form-control">

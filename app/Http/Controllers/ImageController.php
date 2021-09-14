@@ -45,10 +45,10 @@ class ImageController extends Controller
     public function destroy( Request $request )
     {
         // Validación
-       /* $uuid = $request->get('uuid');
+        $uuid = $request->get('uuid');
         $establishment = Establishment::where('uuid', $uuid)->first();
         $this->authorize('delete', $establishment);
-        */
+
         $image = $request->get('image');
 
        if(File::exists('storage/' . $image)) {
